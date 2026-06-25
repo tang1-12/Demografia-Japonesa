@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japón 2080 — Simulador Demográfico Interactivo</title>
+    <meta name="description" content="Simulador demográfico interactivo basado en la crisis de envejecimiento de Japón. Proyecta la población, tasa de fertilidad e inmigración de 2026 a 2080 sobre un mapa de coropletas.">
+
+    <!-- Google Fonts: Inter + Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Leaflet.js CSS (mapa interactivo) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+    <!-- Estilos locales -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- =========================================================
+         BARRA DE NAVEGACIÓN
+    ========================================================= -->
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+        <div class="nav-brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-torii-gate"></i>
+            </div>
+            <div class="brand-text">
+                <span class="brand-title">Japón 2080</span>
+                <span class="brand-subtitle">Simulador Demográfico</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link active" id="nav-sim">
+                <i class="fa-solid fa-map"></i> Simulación
+            </a>
+            <a href="teoria.html" class="nav-link" id="nav-teoria">
+                <i class="fa-solid fa-book-open"></i> Marco Teórico
+            </a>
+        </div>
+        <!-- Indicador de año actual -->
+        <div class="year-badge">
+            <span class="year-label">AÑO</span>
+            <span class="year-value" id="nav-year-display">2026</span>
+        </div>
+    </nav>
+
+    <!-- =========================================================
+         LAYOUT PRINCIPAL: PANEL IZQUIERDO + MAPA + GRÁFICO
+    ========================================================= -->
+    <div class="app-layout">
+
+        <!-- ── PANEL DE CONTROL LATERAL ─────────────────────── -->
+        <aside class="control-panel" id="control-panel" aria-label="Panel de controles">
+
+            <!-- Cabecera del panel -->
+            <div class="panel-section panel-header-block">
+                <h2 class="panel-title">
+                    <i class="fa-solid fa-sliders"></i>
+                    Controles
+                </h2>
+                <p class="panel-desc">Ajusta parámetros para proyectar el futuro demográfico de Japón.</p>
+            </div>
+
+            <!-- ────── SLIDER: AÑO DE SIMULACIÓN ────── -->
+            <div class="panel-section">
+                <div class="slider-header">
+                    <label for="slider-year" class="slider-label">
+                        <i class="fa-solid fa-calendar-days icon-accent"></i>
+                        Año de Simulación
+                    </label>
+                    <span class="slider-val" id="display-year">2026</span>
+                </div>
+                <input
+                    type="range"
+                    id="slider-year"
+                    min="2026"
+                    max="2080"
+                    value="2026"
+                    step="1"
+                    class="custom-slider slider-year"
+                    oninput="onSliderChange()"
+                    aria-label="Año de simulación"
+                >
+                <div class="slider-minmax">
+                    <span>2026</span><span>2080</span>
+                </div>
+            </div>
+
+            <!-- ────── SLIDER: TASA DE FERTILIDAD ────── -->
+            <div class="panel-section">
+                <div class="slider-header">
+                    <label for="slider-fertility" class="slider-label">
+                        <i class="fa-solid fa-baby icon-rose"></i>
+                        Tasa de Fertilidad
+                    </label>
+                    <span class="slider-val" id="display-fertility">1.20</span>
+                </div>
+                <input
+                    type="range"
+                    id="slider-fertility"
+                    min="0.8"
+                    max="2.5"
+                    value="1.2"
+                    step="0.05"
+                    class="custom-slider slider-fertility"
+                    oninput="onSliderChange()"
+                    aria-label="Tasa de fertilidad total (hijos por mujer)"
+                >
+                <div class="slider-minmax">
+                    <span>0.80 ⚠️</span><span>2.50 🌱</span>
+                </div>
+                <p class="slider-hint">Hijos por mujer. Nivel de reemplazo ≈ 2.1</p>
+            </div>
+
+            <!-- ────── RADIO: TASA DE INMIGRACIÓN ────── -->
+            <div class="panel-section">
+                <div class="slider-label-plain">
+                    <i class="fa-solid fa-plane-arrival icon-amber"></i>
+                    Inmigración Anual
+                </div>
+                <div class="radio-group" id="immigration-group">
+                    <label class="radio-pill active" id="pill-low">
+                        <input type="radio" name="immigration" value="low" checked onchange="onSliderChange()">
+                        <span>Baja</span><small>~10K/año</small>
+                    </label>
+                    <label class="radio-pill" id="pill-med">
+                        <input type="radio" name="immigration" value="medium" onchange="onSliderChange()">
+                        <span>Media</span><small>~100K/año</small>
+                    </label>
+                    <label class="radio-pill" id="pill-high">
+                        <input type="radio" name="immigration" value="high" onchange="onSliderChange()">
+                        <span>Alta</span><small>~300K/año</small>
+                    </label>
+                </div>
+            </div>
+
+            <!-- ────── KPIs: MÉTRICAS CLAVE ────── -->
+            <div class="panel-section">
+                <div class="slider-label-plain">
+                    <i class="fa-solid fa-chart-simple icon-accent"></i>
+                    Métricas Globales (Japón)
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-card kpi-blue">
+                        <div class="kpi-icon"><i class="fa-solid fa-users"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Población Total</span>
+                            <span class="kpi-value" id="kpi-population">123.5M</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-amber">
+                        <div class="kpi-icon"><i class="fa-solid fa-person-cane"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Edad Media</span>
+                            <span class="kpi-value" id="kpi-median-age">49.1</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-rose">
+                        <div class="kpi-icon"><i class="fa-solid fa-hospital-user"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Jubilados (+65)</span>
+                            <span class="kpi-value" id="kpi-elderly">30.0%</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-green">
+                        <div class="kpi-icon"><i class="fa-solid fa-seedling"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Crecimiento Anual</span>
+                            <span class="kpi-value" id="kpi-growth">-0.53%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ────── REGIÓN SELECCIONADA ────── -->
+            <div class="panel-section region-info-block" id="region-info-block">
+                <div class="region-info-header">
+                    <span class="region-dot" id="region-dot"></span>
+                    <span class="region-info-name" id="region-info-name">Selecciona una región</span>
+                </div>
+                <div class="region-stats-row" id="region-stats-row" style="display:none">
+                    <div class="region-stat">
+                        <span class="rstat-label">Población</span>
+                        <span class="rstat-val" id="rstat-pop">—</span>
+                    </div>
+                    <div class="region-stat">
+                        <span class="rstat-label">Envejecimiento</span>
+                        <span class="rstat-val" id="rstat-aging">—</span>
+                    </div>
+                    <div class="region-stat">
+                        <span class="rstat-label">Fertilidad</span>
+                        <span class="rstat-val" id="rstat-fert">—</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón reproducción automática -->
+            <div class="panel-section">
+                <div class="play-controls">
+                    <button class="btn-play" id="btn-play" onclick="togglePlay()">
+                        <i class="fa-solid fa-play" id="play-icon"></i>
+                        <span id="play-label">Reproducir</span>
+                    </button>
+                    <button class="btn-reset" onclick="resetSimulation()">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </button>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- ── ÁREA PRINCIPAL: MAPA + GRÁFICO ────────────────── -->
+        <main class="main-area">
+
+            <!-- Mapa Leaflet -->
+            <div class="map-card" id="map-card">
+                <div class="map-card-header">
+                    <h2 class="map-card-title">
+                        <i class="fa-solid fa-earth-asia"></i>
+                        Mapa de Envejecimiento por Región
+                    </h2>
+                    <div class="legend-bar">
+                        <span class="legend-label">Estable</span>
+                        <div class="legend-gradient"></div>
+                        <span class="legend-label">Crisis Severa</span>
+                    </div>
+                </div>
+                <!-- Contenedor del mapa Leaflet -->
+                <div id="map" aria-label="Mapa interactivo de Japón por regiones"></div>
+            </div>
+
+            <!-- Gráfico de proyección temporal (Chart.js) -->
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <h2 class="chart-card-title">
+                        <i class="fa-solid fa-chart-line"></i>
+                        Proyección Poblacional 2026–2080
+                    </h2>
+                    <div class="chart-legend-pills" id="chart-legend-pills">
+                        <!-- generado dinámicamente -->
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="projectionChart" aria-label="Gráfico de proyección poblacional de Japón"></canvas>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Leaflet.js -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Lógica principal -->
+    <script src="app.js"></script>
+</body>
+</html>

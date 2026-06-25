@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marco Teórico — Japón 2080 Simulador Demográfico</title>
+    <meta name="description" content="Marco teórico de la transición demográfica japonesa: trampa de baja fertilidad, modelo de proyección poblacional y el impacto socioeconómico del envejecimiento.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- MathJax para fórmulas LaTeX (CDN, sin npm) -->
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+    <!-- Estilos locales -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- =========================================================
+         NAVBAR
+    ========================================================= -->
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+        <div class="nav-brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-torii-gate"></i>
+            </div>
+            <div class="brand-text">
+                <span class="brand-title">Japón 2080</span>
+                <span class="brand-subtitle">Simulador Demográfico</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link" id="nav-sim">
+                <i class="fa-solid fa-map"></i> Simulación
+            </a>
+            <a href="teoria.html" class="nav-link active" id="nav-teoria">
+                <i class="fa-solid fa-book-open"></i> Marco Teórico
+            </a>
+        </div>
+    </nav>
+
+    <!-- =========================================================
+         CONTENIDO PRINCIPAL DEL MARCO TEÓRICO
+    ========================================================= -->
+    <div class="teoria-layout">
+
+        <!-- HERO -->
+        <div class="teoria-hero">
+            <div class="teoria-badge">
+                <i class="fa-solid fa-microscope"></i> Marco Teórico
+            </div>
+            <h1>La Crisis Demográfica de Japón:<br>Matemática del Envejecimiento</h1>
+            <p class="lead">
+                Japón enfrenta la transición demográfica más extrema del mundo industrializado.
+                Esta página presenta los fundamentos matemáticos, los datos reales y
+                el impacto socioeconómico que alimentan nuestro simulador.
+            </p>
+        </div>
+
+        <!-- TIRA DE ESTADÍSTICAS CLAVE -->
+        <div class="stat-strip">
+            <div class="stat-strip-item">
+                <div class="stat-strip-num">1.20</div>
+                <div class="stat-strip-label">Fertilidad 2023</div>
+            </div>
+            <div class="stat-strip-item">
+                <div class="stat-strip-num">30%</div>
+                <div class="stat-strip-label">Mayores de 65</div>
+            </div>
+            <div class="stat-strip-item">
+                <div class="stat-strip-num">84.6</div>
+                <div class="stat-strip-label">Esperanza de vida</div>
+            </div>
+            <div class="stat-strip-item">
+                <div class="stat-strip-num">-0.5%</div>
+                <div class="stat-strip-label">Crecimiento anual</div>
+            </div>
+            <div class="stat-strip-item">
+                <div class="stat-strip-num">2110</div>
+                <div class="stat-strip-label">Año sin reemplazo</div>
+            </div>
+        </div>
+
+        <!-- =======================================================
+             SECCIÓN 1 — TRANSICIÓN DEMOGRÁFICA
+        ======================================================= -->
+        <div class="teoria-section">
+            <h2 class="teoria-section-title">
+                <i class="fa-solid fa-arrow-trend-down"></i>
+                1. La Transición Demográfica Japonesa
+            </h2>
+
+            <p class="teoria-text">
+                La <strong>teoría de la transición demográfica</strong> describe el proceso histórico
+                por el cual las sociedades evolucionan de una alta natalidad y alta mortalidad hacia
+                una baja natalidad y baja mortalidad. Japón ha atravesado este proceso a una velocidad
+                sin precedentes, pasando de una TFT de 4.5 hijos/mujer en la posguerra (1947)
+                a apenas <strong>1.20 en 2023</strong>, muy por debajo del nivel de reemplazo de 2.1.
+            </p>
+
+            <div class="info-block info-crisis">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>
+                    Japón perdió <strong>más de 831,000 personas</strong> en 2023 (diferencia entre
+                    nacimientos y defunciones), la mayor pérdida poblacional registrada en su historia.
+                    Si no cambia la tendencia, la población podría caer de 123 M a menos de 87 M en 2060.
+                </span>
+            </div>
+
+            <!-- Línea de tiempo -->
+            <div class="timeline" style="margin-top: 1.25rem;">
+                <div class="timeline-item">
+                    <div class="timeline-year">1947–1949</div>
+                    <div class="timeline-text">Baby boom de posguerra. TFT ≈ 4.5. Población crece con fuerza.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1966</div>
+                    <div class="timeline-text">Caída brusca de natalidad (año del "Fuego del Caballo"). TFT desciende a 1.58.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1989</div>
+                    <div class="timeline-text">TFT toca mínimo histórico: 1.57. El gobierno declara "crisis demográfica".</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2005</div>
+                    <div class="timeline-text">Nuevo récord mínimo: 1.26. La población total comienza a decrecer.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2023</div>
+                    <div class="timeline-text">TFT = 1.20. Saldo vegetativo negativo: −831,000 personas. 30 % tiene más de 65 años.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2080 (proyección)</div>
+                    <div class="timeline-text">Sin cambios: Japón podría contar con solo 70–90 M de habitantes, con un 45–50 % de mayores.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =======================================================
+             SECCIÓN 2 — MODELO MATEMÁTICO
+        ======================================================= -->
+        <div class="teoria-section">
+            <h2 class="teoria-section-title">
+                <i class="fa-solid fa-square-root-variable"></i>
+                2. Modelo Matemático de Proyección
+            </h2>
+
+            <p class="teoria-text">
+                El simulador implementa una <strong>proyección discreta de cohortes simplificada</strong>.
+                A diferencia del modelo exponencial o logístico clásico, descompone el cambio poblacional
+                en sus tres componentes fundamentales:
+            </p>
+
+            <div class="formula-box">
+                <div class="formula-title">Ecuación Maestra de la Población</div>
+                <div class="formula-math">P(t+1) = P(t) + N(t) − D(t) + I</div>
+                <div class="formula-vars">
+                    <div class="formula-var"><strong>P(t)</strong> — Población en el año t</div>
+                    <div class="formula-var"><strong>N(t)</strong> — Nacimientos en t (función de la TFT)</div>
+                    <div class="formula-var"><strong>D(t)</strong> — Defunciones en t (función de la mortalidad etaria)</div>
+                    <div class="formula-var"><strong>I</strong> — Inmigración neta anual (parámetro de escenario)</div>
+                </div>
+            </div>
+
+            <p class="teoria-text" style="margin-top:1rem;">
+                Los <strong>nacimientos</strong> se calculan a partir de la Tasa de Fertilidad Total (TFT):
+            </p>
+
+            <div class="formula-box">
+                <div class="formula-title">Función de Nacimientos</div>
+                <div class="formula-math">N(t) = P(t) × φ × (TFT / T<sub>r</sub>)</div>
+                <div class="formula-vars">
+                    <div class="formula-var"><strong>φ = 0.22</strong> — Proporción de mujeres en edad fértil</div>
+                    <div class="formula-var"><strong>T<sub>r</sub> = 30</strong> — Duración del período reproductivo (años)</div>
+                    <div class="formula-var"><strong>TFT</strong> — Tasa de fertilidad total (hijos por mujer)</div>
+                </div>
+            </div>
+
+            <p class="teoria-text" style="margin-top:1rem;">
+                Las <strong>defunciones</strong> usan una tasa de mortalidad dinámica que aumenta
+                con el porcentaje de población anciana:
+            </p>
+
+            <div class="formula-box">
+                <div class="formula-title">Tasa de Mortalidad Dinámica (edad-ponderada)</div>
+                <div class="formula-math">μ(t) = π(t) × 0.042 + (1 − π(t)) × 0.005</div>
+                <div class="formula-vars">
+                    <div class="formula-var"><strong>π(t)</strong> — Fracción de la población mayor de 65 años en t</div>
+                    <div class="formula-var"><strong>0.042</strong> — Tasa de mortalidad del grupo +65 (≈ 42 por mil)</div>
+                    <div class="formula-var"><strong>0.005</strong> — Tasa de mortalidad del grupo &lt;65 (≈ 5 por mil)</div>
+                </div>
+            </div>
+
+            <div class="info-block info-note" style="margin-top:1rem;">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>
+                    La fracción de mayores de 65, <strong>π(t)</strong>, evoluciona dinámicamente
+                    cada año: aumenta en proporción al envejecimiento base (~0.3 %/año) y decrece
+                    al ritmo de los nacimientos e inmigración que incorporan personas jóvenes al sistema.
+                </span>
+            </div>
+        </div>
+
+        <!-- =======================================================
+             SECCIÓN 3 — TRAMPA DE BAJA FERTILIDAD
+        ======================================================= -->
+        <div class="teoria-section">
+            <h2 class="teoria-section-title">
+                <i class="fa-solid fa-lock"></i>
+                3. La Trampa de la Baja Fertilidad
+            </h2>
+
+            <p class="teoria-text">
+                El demógrafo Wolfgang Lutz (IIASA) formuló el concepto de <em>low-fertility trap</em>:
+                una vez que la TFT cae por debajo de ~1.5, se activan mecanismos de retroalimentación
+                que hacen muy difícil la recuperación:
+            </p>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem; margin:1rem 0;">
+                <div class="formula-box">
+                    <div class="formula-title"><i class="fa-solid fa-brain"></i> Efecto Normativo</div>
+                    <p style="font-size:0.82rem; color:var(--text-secondary); line-height:1.5; margin-top:0.5rem;">
+                        Las nuevas generaciones crecen en familias pequeñas y
+                        perciben 1–2 hijos como el "tamaño ideal". La norma social
+                        converge hacia la baja fertilidad.
+                    </p>
+                </div>
+                <div class="formula-box">
+                    <div class="formula-title"><i class="fa-solid fa-building-columns"></i> Efecto Económico</div>
+                    <p style="font-size:0.82rem; color:var(--text-secondary); line-height:1.5; margin-top:0.5rem;">
+                        Menos trabajadores jóvenes → menor crecimiento del PIB →
+                        mayor carga fiscal por pensiones → desincentivo al gasto
+                        en vivienda y crianza.
+                    </p>
+                </div>
+                <div class="formula-box">
+                    <div class="formula-title"><i class="fa-solid fa-female"></i> Efecto de Cohorte</div>
+                    <p style="font-size:0.82rem; color:var(--text-secondary); line-height:1.5; margin-top:0.5rem;">
+                        Una baja natalidad sostenida produce cohortes de mujeres más
+                        pequeñas → aunque la TFT suba, los nacimientos totales siguen
+                        cayendo por décadas.
+                    </p>
+                </div>
+                <div class="formula-box">
+                    <div class="formula-title"><i class="fa-solid fa-briefcase"></i> Efecto Mercado Laboral</div>
+                    <p style="font-size:0.82rem; color:var(--text-secondary); line-height:1.5; margin-top:0.5rem;">
+                        En Japón, la participación laboral femenina choca con la
+                        maternidad (cultura "M-curve"). Las mujeres posponen o evitan
+                        la maternidad para mantener su carrera.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-block info-tip">
+                <i class="fa-solid fa-lightbulb"></i>
+                <span>
+                    Experimenta en el simulador: sube la fertilidad a 2.1 y la inmigración a "Alta".
+                    Observa cómo incluso en ese escenario óptimo, la población sigue decreciendo
+                    durante 20–30 años por el <strong>efecto de inercia demográfica</strong>.
+                </span>
+            </div>
+        </div>
+
+        <!-- =======================================================
+             SECCIÓN 4 — IMPACTO SOCIOECONÓMICO
+        ======================================================= -->
+        <div class="teoria-section">
+            <h2 class="teoria-section-title">
+                <i class="fa-solid fa-yen-sign"></i>
+                4. Impacto Socioeconómico del Envejecimiento
+            </h2>
+
+            <p class="teoria-text">
+                El envejecimiento acelerado tiene consecuencias sistémicas en cuatro dimensiones clave:
+            </p>
+
+            <div class="formula-box" style="margin-bottom:0.75rem;">
+                <div class="formula-title"><i class="fa-solid fa-piggy-bank"></i> Sistema de Pensiones</div>
+                <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.5;margin-top:0.5rem;">
+                    En 2024, la <strong>razón de dependencia</strong> (población +65 / población 20–64)
+                    supera el 50 % en Japón. Eso significa que dos trabajadores activos financian a cada
+                    jubilado. Se proyecta que llegue al <strong>80 %</strong> en 2050.
+                </p>
+            </div>
+
+            <div class="formula-box" style="margin-bottom:0.75rem;">
+                <div class="formula-title"><i class="fa-solid fa-hospital"></i> Sistema de Salud</div>
+                <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.5;margin-top:0.5rem;">
+                    El gasto en salud per cápita se triplica para personas mayores de 75 años.
+                    Japón destina ya el <strong>11.1 % del PIB</strong> a salud, y esa proporción
+                    seguirá creciendo. El cuidado de ancianos se ha convertido en la ocupación de
+                    mayor demanda del país.
+                </p>
+            </div>
+
+            <div class="formula-box" style="margin-bottom:0.75rem;">
+                <div class="formula-title"><i class="fa-solid fa-chart-bar"></i> Productividad y PIB</div>
+                <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.5;margin-top:0.5rem;">
+                    Una fuerza laboral que envejece es, en promedio, menos productiva en economías
+                    intensivas en innovación. El Banco Mundial estima que Japón podría perder
+                    <strong>entre 0.5 % y 1.2 % de PIB anual</strong> adicional
+                    por la contracción de su población activa entre 2026 y 2060.
+                </p>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title"><i class="fa-solid fa-city"></i> Despoblamiento Rural</div>
+                <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.5;margin-top:0.5rem;">
+                    Más de <strong>900 municipios</strong> (de ~1,700 totales) están clasificados en
+                    riesgo de extinción. La concentración en Tokio—que ya alberga el 10 % de la población
+                    total—agrava las desigualdades regionales visibles en el mapa de coropletas.
+                </p>
+            </div>
+        </div>
+
+        <!-- =======================================================
+             SECCIÓN 5 — REFERENCIAS
+        ======================================================= -->
+        <div class="teoria-section">
+            <h2 class="teoria-section-title">
+                <i class="fa-solid fa-book"></i>
+                5. Referencias y Fuentes de Datos
+            </h2>
+            <p class="teoria-text">Los datos del simulador se basan en las siguientes fuentes primarias:</p>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;padding-left:0;">
+                <li style="font-size:0.82rem;color:var(--text-secondary);display:flex;gap:0.5rem;align-items:flex-start;">
+                    <i class="fa-solid fa-circle-dot" style="color:var(--accent-orange);margin-top:3px;flex-shrink:0"></i>
+                    <span><strong style="color:var(--text-primary)">Statistics Bureau of Japan (2024)</strong>. <em>Population Estimates</em>. Ministry of Internal Affairs and Communications.</span>
+                </li>
+                <li style="font-size:0.82rem;color:var(--text-secondary);display:flex;gap:0.5rem;align-items:flex-start;">
+                    <i class="fa-solid fa-circle-dot" style="color:var(--accent-orange);margin-top:3px;flex-shrink:0"></i>
+                    <span><strong style="color:var(--text-primary)">National Institute of Population and Social Security Research (2023)</strong>. <em>Population Projections for Japan 2023–2120</em>. Tokyo.</span>
+                </li>
+                <li style="font-size:0.82rem;color:var(--text-secondary);display:flex;gap:0.5rem;align-items:flex-start;">
+                    <i class="fa-solid fa-circle-dot" style="color:var(--accent-orange);margin-top:3px;flex-shrink:0"></i>
+                    <span><strong style="color:var(--text-primary)">Lutz, W., Skirbekk, V. & Testa, M.R. (2006)</strong>. "The Low-Fertility Trap Hypothesis". <em>Vienna Yearbook of Population Research</em>, 4, 167–188.</span>
+                </li>
+                <li style="font-size:0.82rem;color:var(--text-secondary);display:flex;gap:0.5rem;align-items:flex-start;">
+                    <i class="fa-solid fa-circle-dot" style="color:var(--accent-orange);margin-top:3px;flex-shrink:0"></i>
+                    <span><strong style="color:var(--text-primary)">World Bank (2024)</strong>. <em>World Development Indicators: Japan</em>. data.worldbank.org</span>
+                </li>
+                <li style="font-size:0.82rem;color:var(--text-secondary);display:flex;gap:0.5rem;align-items:flex-start;">
+                    <i class="fa-solid fa-circle-dot" style="color:var(--accent-orange);margin-top:3px;flex-shrink:0"></i>
+                    <span><strong style="color:var(--text-primary)">United Nations DESA (2024)</strong>. <em>World Population Prospects 2024</em>. population.un.org</span>
+                </li>
+            </ul>
+        </div>
+
+    </div><!-- /teoria-layout -->
+
+</body>
+</html>
